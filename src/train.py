@@ -12,7 +12,7 @@ if torch.cuda.is_available():
 else:
     device = "cpu"
 model = model.to(device)
-
+print(f"device is {device}")
 criterion = nn.CrossEntropyLoss()
 
 optimizer = torch.optim.Adam(
@@ -20,6 +20,8 @@ optimizer = torch.optim.Adam(
     lr=LR
 )
 count = 0;
+
+
 for epoch in range(NUM_EPOCHS):
     for images, labels in train_loader:
         images = images.to(device)
@@ -33,3 +35,4 @@ for epoch in range(NUM_EPOCHS):
         print(f"count = {count}")
 
     print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Loss: {loss.item():.4f}")
+
