@@ -19,10 +19,11 @@ optimizer = torch.optim.Adam(
     model.parameters(),
     lr=LR
 )
-count = 0;
 
 
 for epoch in range(NUM_EPOCHS):
+    total_loss = 0
+
     for images, labels in train_loader:
         images = images.to(device)
         labels = labels.to(device)
@@ -31,8 +32,8 @@ for epoch in range(NUM_EPOCHS):
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-        count = count + 1
-        print(f"count = {count}")
+        total_loss += loss.item()
 
-    print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Loss: {loss.item():.4f}")
+    avg_loss = total_loss / len(train_loader)
+    print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Avg Loss: {avg_loss:.4f}")
 
