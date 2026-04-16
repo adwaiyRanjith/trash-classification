@@ -32,7 +32,7 @@ train_transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-ds = datasets.ImageFolder(DATA_DIR, val_transform)
+ds = datasets.ImageFolder(DATA_DIR, transform=None)
 
 
 
