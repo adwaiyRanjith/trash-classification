@@ -20,7 +20,6 @@ optimizer = torch.optim.Adam(
     lr=LR
 )
 
-
 for epoch in range(NUM_EPOCHS):
     total_loss = 0
     model.train()
@@ -37,6 +36,8 @@ for epoch in range(NUM_EPOCHS):
     avg_loss = total_loss / len(train_loader)
     model.eval()
     val_loss = 0;
+    correct = 0
+    total = 0
     with torch.no_grad():
         for images, labels in val_loader:
             images = images.to(device)
@@ -44,6 +45,14 @@ for epoch in range(NUM_EPOCHS):
             outputs = model(images)
             loss = criterion(outputs, labels)
             val_loss += loss.item()
+            predictions = outputs.argmax(dim=1)
+            correct += (predictions == labels).sum().item()
+            total += labels.size(0)
+            
     avg_val_loss = val_loss / len(val_loader)
-    print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f}")
+    val_accuracy = correct / total
+
+    
+
+    print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_accuracy:.2f}")
 
