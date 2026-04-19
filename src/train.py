@@ -19,8 +19,10 @@ optimizer = torch.optim.Adam(
     model.parameters(),
     lr=LR
 )
+best_val_loss = float('inf')
 
 for epoch in range(NUM_EPOCHS):
+
     total_loss = 0
     model.train()
     for images, labels in train_loader:
@@ -51,7 +53,10 @@ for epoch in range(NUM_EPOCHS):
             
     avg_val_loss = val_loss / len(val_loader)
     val_accuracy = correct / total
-
+    if avg_val_loss < best_val_loss:
+        best_val_loss = avg_val_loss
+        torch.save(model.state_dict(), "checkpoints/best_model.pth")
+        print(f"  → New best model saved!")
     
 
     print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_accuracy:.2f}")
