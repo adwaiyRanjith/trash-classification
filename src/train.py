@@ -20,6 +20,7 @@ optimizer = torch.optim.Adam(
     lr=LR
 )
 best_val_loss = float('inf')
+os.makedirs("checkpoints", exist_ok=True)
 
 for epoch in range(NUM_EPOCHS):
 
