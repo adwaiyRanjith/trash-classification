@@ -21,6 +21,7 @@ optimizer = torch.optim.Adam(
     model.parameters(),
     lr=LR
 )
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 5, gamma = .5)
 best_val_loss = float('inf')
 os.makedirs("checkpoints", exist_ok=True)
 patience = PATIENCE
@@ -74,4 +75,5 @@ for epoch in range(NUM_EPOCHS):
     
 
     print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_accuracy:.2f}")
+    scheduler.step()
 

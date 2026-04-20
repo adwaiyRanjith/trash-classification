@@ -9,4 +9,4 @@ model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
 
 in_features = model.fc.in_features
 
-model.fc = nn.Linear(in_features, NUM_CLASSES)
+model.fc = nn.Sequential(nn.Dropout(0.5), nn.Linear(in_features, NUM_CLASSES))
