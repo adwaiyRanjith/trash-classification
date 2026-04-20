@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 sys.path.append(".")
 
 import torch
@@ -58,7 +59,10 @@ for epoch in range(NUM_EPOCHS):
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
         torch.save(model.state_dict(), "checkpoints/best_model.pth")
+        if os.path.exists("/content/drive/MyDrive/"):
+            shutil.copy("checkpoints/best_model.pth", "/content/drive/MyDrive/best_model.pth")
         print(f"  → New best model saved!")
+
     
 
     print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_accuracy:.2f}")
