@@ -6,7 +6,7 @@ sys.path.append(".")
 import torch
 import torch.nn as nn
 from model import model
-from config import LR, NUM_EPOCHS, NUM_CLASSES
+from config import LR, NUM_EPOCHS, PATIENCE
 from dataset import train_loader, val_loader
 
 if torch.cuda.is_available():
@@ -23,6 +23,8 @@ optimizer = torch.optim.Adam(
 )
 best_val_loss = float('inf')
 os.makedirs("checkpoints", exist_ok=True)
+patience = PATIENCE
+epochs_with_no_improvement = 0
 
 for epoch in range(NUM_EPOCHS):
 
@@ -62,6 +64,12 @@ for epoch in range(NUM_EPOCHS):
         if os.path.exists("/content/drive/MyDrive/"):
             shutil.copy("checkpoints/best_model.pth", "/content/drive/MyDrive/best_model.pth")
         print(f"  → New best model saved!")
+        epochs_with_no_improvement = 0
+    else:
+        epochs_with_no_improvement += 1
+        if epochs_with_no_improvement >= patience:
+            print(f"Early stopping at epoch {epoch+1}")
+            break
 
     
 
