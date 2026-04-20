@@ -64,7 +64,7 @@ for epoch in range(NUM_EPOCHS):
         torch.save(model.state_dict(), "checkpoints/best_model.pth")
         if os.path.exists("/content/drive/MyDrive/"):
             shutil.copy("checkpoints/best_model.pth", "/content/drive/MyDrive/best_model.pth")
-        print(f"  → New best model saved!")
+        print(f" -> New best model saved!")
         epochs_with_no_improvement = 0
     else:
         epochs_with_no_improvement += 1

@@ -8,6 +8,7 @@ NUM_CLASSES = 8
 BATCH_SIZE = 32
 LR = 1e-3
 
+USERNAMe="aranjith"
 
 NUM_EPOCHS = 40
 
