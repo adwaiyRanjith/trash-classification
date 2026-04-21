@@ -1,13 +1,4 @@
-# trash-classification
-a classification model that uses cv to look at and classify various types of trash
-
-
-so far this what i got:
-Test Accuracy: 97.76%
-
----
-
-## For Mentors
+# Trash Classification Model
 
 ### What this project does
 Fine-tunes a ResNet18 (pretrained on ImageNet) to classify images of trash into 8 categories: battery, biological, cardboard, glass, metal, paper, plastic, and trash. The model replaces ResNet18's final layer with a dropout + linear head, then trains end-to-end on a labeled image dataset.
