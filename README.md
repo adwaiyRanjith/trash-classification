@@ -65,8 +65,8 @@ modal run modal_evaluate.py   # evaluates from Modal volume
 Requires a Modal account and a volume named `trash-dataset` containing `cleaned_trash_data.zip`.
 
 ### Key config options (`config.py`)
-| Variable | Default | Description |
-|----------|---------|-------------|
+| Variable | Description |
+|----------|-------------|
 | `NUM_CLASSES` | number of trash categories |
 | `BATCH_SIZE` | training batch size |
 | `LR` | Adam learning rate |
