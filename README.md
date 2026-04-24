@@ -41,18 +41,23 @@ modal_evaluate.py   — remote evaluation on Modal
 ```
 
 ### How to run locally
-```bash
-# 1. copy .env.example or create .env with your data path
-echo "DATA_DIR=/path/to/data/raw/original" > .env
-
-# 2. install dependencies
+```
+# 1. Download the dataset from:
+#    https://www.kaggle.com/datasets/sumn2u/garbage-classification-v2
+# 2. Unzip and place the contents so the structure looks like:
+#    data/raw/original/battery/
+#    data/raw/original/glass/
+#    ... etc
+# 3. Create .env with your data path
+echo "DATA_DIR=/path/to/trash-classification/data/raw/original" > .env
+# 4. Install dependencies
 pip install -r requirements.txt
-
-# 3. train
-python src/train.py        # saves checkpoints/best_model.pth
-
-# 4. evaluate
+# 5. Train
+python src/train.py
+# 6. Evaluate
 python src/evaluate.py
+# 7. Run webcam classifier (requires best_model.pth in checkpoints/)
+python src/predict.py
 ```
 
 ### How to run on Google Colab
