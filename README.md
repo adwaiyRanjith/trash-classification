@@ -8,6 +8,7 @@ Fine-tunes a ResNet18 (pretrained on ImageNet) to classify images of trash into 
 - Split 80/10/10 into train/val/test (7,134 / 892 / 892)
 - Classes are imbalanced (glass: 1,736 images vs. trash: 453), handled with `WeightedRandomSampler`
 - The dataset is **not committed** to the repo (listed in `.gitignore`). For Colab/Modal runs, it lives as `cleaned_trash_data.zip` on Google Drive / a Modal volume
+- For Colab/Modal training, download the dataset from "https://www.kaggle.com/datasets/sumn2u/garbage-classification-v2" as a zip file and place it into your drive.
 
 ### Model & training
 - **Architecture:** ResNet18 (pretrained) → Dropout(0.5) → Linear(512, 8)
