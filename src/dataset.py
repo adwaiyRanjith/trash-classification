@@ -42,7 +42,10 @@ val_size = int(.1 * total_img)
 test_size = total_img - train_size - val_size
 
 # split up the dataset into train, val, and test
-train_raw, val_raw, test_raw = torch.utils.data.random_split(ds, (train_size, val_size, test_size))
+train_raw, val_raw, test_raw = torch.utils.data.random_split(
+    ds, (train_size, val_size, test_size),
+    generator=torch.Generator().manual_seed(42)
+)
 
 class_counts = [ds.targets.count(i) for i in range(NUM_CLASSES)]
 class_weights = [1.0 / count for count in class_counts]

@@ -36,8 +36,7 @@ notebooks/
   explore.ipynb     — class distribution + sample visualization
   train.ipynb       — Colab training notebook
   evaluate.ipynb    — Colab evaluation notebook
-modal_train.py      — remote training on Modal (A10G GPU)
-modal_evaluate.py   — remote evaluation on Modal
+modal_evaluate.py   — remote evaluation on Modal (A10G GPU)
 ```
 
 ### How to run locally
@@ -65,10 +64,9 @@ Open `notebooks/train.ipynb` — it clones the repo, mounts your Drive, unzips t
 
 ### How to run on Modal
 ```bash
-modal run modal_train.py      # trains on A10G GPU, saves model to Modal volume
 modal run modal_evaluate.py   # evaluates from Modal volume
 ```
-Requires a Modal account and a volume named `trash-dataset` containing `cleaned_trash_data.zip`.
+Requires a Modal account and a volume named `trash-dataset` containing `best_model.pth`.
 
 ### Key config options (`config.py`)
 | Variable | Description |
