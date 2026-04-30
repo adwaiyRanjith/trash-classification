@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import json
 sys.path.append(".")
 
 import torch
@@ -24,8 +25,10 @@ optimizer = torch.optim.Adam(
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 5, gamma = .5)
 best_val_loss = float('inf')
 os.makedirs("checkpoints", exist_ok=True)
+os.makedirs("results", exist_ok=True)
 patience = PATIENCE
 epochs_with_no_improvement = 0
+history = {"train_loss": [], "val_loss": [], "val_acc": []}
 
 for epoch in range(NUM_EPOCHS):
 
@@ -64,6 +67,7 @@ for epoch in range(NUM_EPOCHS):
         torch.save(model.state_dict(), "checkpoints/best_model.pth")
         if os.path.exists("/content/drive/MyDrive/"):
             shutil.copy("checkpoints/best_model.pth", "/content/drive/MyDrive/best_model.pth")
+            shutil.copy("results/history.json", "/content/drive/MyDrive/history.json")
         print(f" -> New best model saved!")
         epochs_with_no_improvement = 0
     else:
@@ -74,6 +78,12 @@ for epoch in range(NUM_EPOCHS):
 
     
 
+    history["train_loss"].append(avg_loss)
+    history["val_loss"].append(avg_val_loss)
+    history["val_acc"].append(val_accuracy)
     print(f"Epoch {epoch+1}/{NUM_EPOCHS} | Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_accuracy:.2f}")
     scheduler.step()
+
+with open("results/history.json", "w") as f:
+    json.dump(history, f)
 
