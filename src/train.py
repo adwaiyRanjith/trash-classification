@@ -20,7 +20,8 @@ criterion = nn.CrossEntropyLoss()
 
 optimizer = torch.optim.Adam(
     model.parameters(),
-    lr=LR
+    lr=LR,
+    weight_decay=1e-4
 )
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 5, gamma = .5)
 best_val_loss = float('inf')
